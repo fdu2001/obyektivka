@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Obyektivka</title>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.25/jspdf.plugin.autotable.min.js"></script>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <h3> Aziz foydalanuvchi bzi ushbu dasturni qo'ldan kelgancha soddalashtirdik sizga qulay bo'lishi uchun.<br>
+        <h4> Agarda sizda savol va takliflar bo'lsa telegram akkauntimizga murojat qilin: <a href="https://t.me/Talabaga_admin" target="_blank">@Talabaga_admin</a></h4>
+<div class="section">
+                <h1>MA'LUMOTNOMA (OBYEKTIVKA)</h1>
+
+            <label for="name">F.I.O:</label>
+            <input type="text" id="name" name="name" required>
+<BR>
+            <label for="birth-date">Tug'ilgan yili:</label>
+            <input type="date" id="birth-date" name="birth-date" required>
+<BR>
+            <label for="birth-place">Tug'ilgan joyi:</label>
+            <input type="text" id="birth-place" name="birth-place" required>
+<BR>
+            <label for="nationality">Millati:</label>
+            <input type="text" id="nationality" name="nationality" required>
+<BR>
+            <label for="party">Partiyaviyligi:</label>
+            <input type="text" id="party" name="party">
+<BR>
+            <label for="education">Ma'lumoti:</label>
+            <input type="text" id="education" name="education" required>
+<BR>
+            <label for="specialty">Tamomlagan:</label>
+            <input type="text" id="specialty" name="specialty">
+<BR>
+            <label for="mutaxasis">Ma'lumoti bo'yicha mutaxassisligi:</label>
+            <input type="text" id="mutaxasis" name="mutaxasis">
+<BR>
+            <label for="daraja">Ilmiy darajasi:</label>
+            <input type="text" id="daraja" name="daraja">
+<BR>
+            <label for="unvon">Ilmiy unvoni:</label>
+            <input type="text" id="unvon" name="unvon">
+<BR>
+            <label for="foreign-languages">Qaysi chet tillarini biladi:</label>
+            <input type="text" id="foreign-languages" name="foreign-languages">
+<BR>
+            <label for="mukofot">Davlat mukofotlari bilan taqdirlanganmi (qanaqa):</label>
+            <input type="text" id="mukofot" name="mukofot">
+<BR>
+            <label for="orgazo">Xalq deputatlari respublika, viloyat, shahar va tuman Kengashi deputatimi yoki boshqa saylanadigan organlarning a'zosi:</label>
+            <input type="text" id="orgazo" name="orgazo">
+<BR>
+        </div>
+
+        <div class="section">
+            <h2>Mehnat faoliyati</h2>
+            <textarea id="work-experience" name="work-experience"></textarea>
+        </div>
+        <div class="section">
+            <h2>Yaqin qarindoshlar haqida ma'lumot</h2>
+            <table id="relatives-table">
+                <thead>
+                    <tr>
+                        <th>Qarindoshlik</th>
+                        <th>F.I.SH</th>
+                        <th>Tug'ilgan yili va joyi</th>
+                        <th>Ish joyi va lavozimi</th>
+                        <th>Turar joyi</th>
+                    </tr>
+                </thead>
+                <tbody id="tableBody">
+                    <tr>
+                        <td><input type="text" name="qarindoshlik[]" placeholder="Masalan: Otasi"></td>
+                        <td><input type="text" name="fio[]" placeholder="F.I.SH"></td>
+                        <td><input type="text" name="tugilgan[]" placeholder="Tug'ilgan yili va joyi"></td>
+                        <td><input type="text" name="ish[]" placeholder="Ish joyi va lavozimi"></td>
+                        <td><input type="text" name="turar_joyi[]" placeholder="Turar joyi"></td>
+                    </tr>
+                </tbody>
+            </table>
+            <button type="button" class="add-row-button" onclick="addRow()">Qator qo'shish</button>
+        </div>
+    </form>
+        <button type="button" class="save-button" onclick="saveAsPDF()"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" stroke-linejoin="round" stroke-linecap="round" viewBox="0 0 24 24" stroke-width="2" fill="none" stroke="currentColor" class="icon"><polyline points="16 16 12 12 8 16"></polyline><line y2="21" x2="12" y1="12" x1="12"></line><path d="M20.39 18.39A5 5 0 0 0 18 9h-1.26A8 8 0 1 0 3 16.3"></path><polyline points="16 16 12 12 8 16"></polyline></svg></button>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.25/jspdf.plugin.autotable.min.js"></script>
+    <script>
+        function saveAsPDF() {
+            const { jsPDF } = window.jspdf;
+            const doc = new jsPDF();
+           const pageWidth = doc.internal.pageSize.getWidth();
+            // Times New Roman shrifti sifatida "times" ni tanlash
+            doc.setFont("times", "normal", "bold"); // "bold" yoki "italic" ham ishlatish mumkin
+            doc.text("MA'LUMOTNOMA", 80, 20);
+            doc.text("" + document.getElementById('name').value, 70, 30);
+            doc.setFontSize(12);
+            doc.text("Tug‘ilgan yili:", 20, 40);
+            doc.setFont("times", "normal",);
+            doc.text(document.getElementById('birth-date').value, 20, 50);
+            doc.setFont("times", "normal", "bold");
+            doc.text("Tug‘ilgan joyi:", 100, 40)
+            doc.setFont("times", "normal",); 
+            doc.text(document.getElementById('birth-place').value, 100, 50);
+            doc.setFont("times", "normal", "bold");
+            doc.text("Millati:", 20, 60)
+            doc.setFont("times", "normal",); 
+            doc.text(document.getElementById('nationality').value, 20, 70);
+            doc.setFont("times", "normal", "bold");
+            doc.text("Partiyaviyligi:", 100, 60)
+            doc.setFont("times", "normal",);
+            doc.text(document.getElementById('party').value, 100, 70);
+            doc.setFont("times", "normal", "bold");
+            doc.text("Ma'lumoti:", 20, 80)
+            doc.setFont("times", "normal",);
+            doc.text(document.getElementById('education').value, 20, 90);
+            doc.setFont("times", "normal", "bold");
+            doc.text("Tamomlagan:", 100, 80)
+            doc.setFont("times", "normal",);
+            doc.text(document.getElementById('specialty').value, 100, 90);
+            doc.setFont("times", "normal", "bold");
+            doc.text("Mutaxasisligi:", 20, 100)
+            doc.setFont("times", "normal",);
+            doc.text(document.getElementById('mutaxasis').value, 100, 100);
+            doc.setFont("times", "normal", "bold");
+            doc.text("Ilmiy darajasi:", 20, 110)
+            doc.setFont("times", "normal",);
+            doc.text(document.getElementById('daraja').value, 20, 120);
+            doc.setFont("times", "normal", "bold");
+            doc.text("Ilmiy unvoni:", 100, 110)
+            doc.setFont("times", "normal",);
+            doc.text(document.getElementById('unvon').value, 100, 120);
+            doc.setFont("times", "normal", "bold");
+            doc.text("Qaysi chet tillarini biladi:", 20, 130)
+            doc.setFont("times", "normal",);
+            doc.text(document.getElementById('foreign-languages').value, 20, 140);
+            doc.setFont("times", "normal", "bold");
+            doc.text("Davlat mukofotlari bilan taqdirlanganmi (qanaqa):", 20, 150)
+            doc.setFont("times", "normal",);
+            doc.text(document.getElementById('mukofot').value, 20, 160);
+            doc.setFont("times", "normal", "bold");
+            doc.text("Xalq deputatlari respublika, viloyat, shahar va tuman kengashi deputatimi", 20, 170)
+            doc.text("yoki boshqa saylanadigan organlarning a’zosimi:", 20, 175)
+            doc.setFont("times", "normal",);
+            doc.text(document.getElementById('orgazo').value, 20, 190);
+            doc.setFontSize(14);
+            doc.setFont("times", "normal", "bold");
+            doc.text("MEHNAT FAOLIYATI", 80, 200)
+            doc.setFontSize(12);
+            doc.setFont("times", "normal",);
+            doc.text(document.getElementById('work-experience').value, 20, 210);
+            doc.addPage();
+
+            const table = document.getElementById('relatives-table');
+            const headers = Array.from(table.querySelectorAll('thead th')).map(th => th.textContent);
+            const rows = Array.from(table.querySelectorAll('tbody tr')).map(row =>
+                Array.from(row.querySelectorAll('input')).map(input => input.value)
+
+            );
+const name = document.getElementById('name').value.trim();
+doc.setFont("times", "normal", "bold");
+        const text = `${name}ning yaqin qarindoshlari`;
+        doc.text(text, 60, 20);
+            doc.autoTable({
+                head: [headers],
+                body: rows,
+                startY: 30,
+                styles: { font: "times", fontSize: 10 },
+            });
+
+            doc.save("obyektivka.pdf");
+        }
+
+        function addRow() {
+            const tableBody = document.getElementById('tableBody');
+            const newRow = document.createElement('tr');
+            newRow.innerHTML = `
+                <td><input type="text" name="qarindoshlik[]" placeholder="Masalan: Otasi"></td>
+                <td><input type="text" name="fio[]" placeholder="Familiya Ismi"></td>
+                <td><input type="text" name="tugilgan[]" placeholder="Tug'ilgan yili va joyi"></td>
+                <td><input type="text" name="ish[]" placeholder="Ish joyi va lavozimi"></td>
+                <td><input type="text" name="turar_joyi[]" placeholder="Turar joyi"></td>
+            `;
+
+            tableBody.appendChild(newRow);
+        }
+    </script>
+</body>
+</html>
